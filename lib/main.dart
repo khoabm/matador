@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:matador/constant/routes_constraints.dart';
 import 'package:matador/routes_settings.dart';
 import 'package:matador/theme/color.dart';
+import 'package:matador/widgets/bottom_bar.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Matador',
       theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: CustomColors.scaffoldBackgroundColor,
         iconTheme: const IconThemeData(
           color: Colors.black, //change your color here
@@ -26,21 +29,24 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: (settings) => generateRoutes(settings),
-      home: Scaffold(
-        body: Center(
-          child: Builder(builder: (context) {
-            return ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  RoutesHandler.LOGIN,
-                  (route) => false,
-                );
-              },
-              child: const Text('Click!'),
-            );
-          }),
-        ),
+      home: const Scaffold(
+        body: BottomBar(),
+        // body: Center(
+        //   child: Builder(
+        //     builder: (context) {
+        //       return ElevatedButton(
+        //         onPressed: () {
+        //           Navigator.pushNamedAndRemoveUntil(
+        //             context,
+        //             RoutesHandler.BOTTOM_BAR,
+        //             (route) => true,
+        //           );
+        //         },
+        //         child: const Text('Click!'),
+        //       );
+        //     },
+        //   ),
+        // ),
       ),
     );
   }
