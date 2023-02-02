@@ -11,6 +11,13 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
   late TabController _tabController;
+  int _page = 0;
+
+  void updatePage(int page) {
+    setState(() {
+      _page = page;
+    });
+  }
 
   @override
   void initState() {
@@ -19,6 +26,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
       length: 2,
       vsync: this,
     );
+    _tabController.addListener(_handleTabSelection);
   }
 
   @override
@@ -29,6 +37,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    //final index = DefaultTabController.of(context).index;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -43,12 +52,12 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
               ),
             ),
             title: Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 Text(
-                  'ĐĂNG NHẬP',
-                  style: TextStyle(
-                    color: Colors.black,
+                  _page == 0 ? 'ĐĂNG NHẬP' : "ĐĂNG KÝ",
+                  style: const TextStyle(
+                    color: CustomColors.scaffoldBackgroundColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -61,6 +70,10 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TabBar(
+              onTap: (index) {
+                updatePage(index);
+                print(_page);
+              },
               unselectedLabelColor: Colors.black,
               labelColor: CustomColors.primaryColor,
               tabs: const [
@@ -90,5 +103,11 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  void _handleTabSelection() {
+    setState(() {
+      _page = _tabController.index;
+    });
   }
 }

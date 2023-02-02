@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   final bool isObscure;
   final int maxLines;
   final TextInputType inputType;
+  final Icon? prefixIcons;
   const CustomTextField({
     super.key,
     required this.controller,
@@ -13,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     required this.isObscure,
     this.inputType = TextInputType.text,
     this.maxLines = 1,
+    this.prefixIcons,
   });
 
   @override
@@ -23,6 +25,7 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       keyboardType: inputType,
       decoration: InputDecoration(
+        prefixIcon: prefixIcons,
         contentPadding: const EdgeInsets.only(
           left: 10.0,
           top: 15.0,

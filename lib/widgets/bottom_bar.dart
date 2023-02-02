@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matador/theme/color.dart';
 import 'package:matador/view/auth_view.dart';
 
 class BottomBar extends StatefulWidget {
@@ -41,6 +42,7 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         onTap: updatePage,
         items: [
           //HOME
@@ -50,15 +52,18 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                      width: bottomBarBorderWidth,
-                      color: _page == 0 ? Colors.black : Colors.white),
+                    width: bottomBarBorderWidth,
+                    color: _page == 0
+                        ? CustomColors.primaryColor
+                        : CustomColors.scaffoldBackgroundColor,
+                  ),
                 ),
               ),
               child: const Icon(
                 Icons.home_outlined,
               ),
             ),
-            label: '',
+            label: 'Trang chính',
           ),
           //CART
           BottomNavigationBarItem(
@@ -67,15 +72,18 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                      width: bottomBarBorderWidth,
-                      color: _page == 1 ? Colors.black : Colors.white),
+                    width: bottomBarBorderWidth,
+                    color: _page == 1
+                        ? CustomColors.primaryColor
+                        : CustomColors.scaffoldBackgroundColor,
+                  ),
                 ),
               ),
               child: const Icon(
                 Icons.shopping_cart_outlined,
               ),
             ),
-            label: '',
+            label: 'Giỏ hàng',
           ),
           //PROFILE
           BottomNavigationBarItem(
@@ -84,15 +92,18 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                      width: bottomBarBorderWidth,
-                      color: _page == 2 ? Colors.black : Colors.white),
+                    width: bottomBarBorderWidth,
+                    color: _page == 2
+                        ? CustomColors.primaryColor
+                        : CustomColors.scaffoldBackgroundColor,
+                  ),
                 ),
               ),
               child: const Icon(
                 Icons.person_outline,
               ),
             ),
-            label: '',
+            label: 'Tài khoản',
           ),
           BottomNavigationBarItem(
             icon: Container(
@@ -100,15 +111,18 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                      width: bottomBarBorderWidth,
-                      color: _page == 3 ? Colors.black : Colors.white),
+                    width: bottomBarBorderWidth,
+                    color: _page == 3
+                        ? CustomColors.primaryColor
+                        : CustomColors.scaffoldBackgroundColor,
+                  ),
                 ),
               ),
               child: const Icon(
                 Icons.notifications_on_outlined,
               ),
             ),
-            label: '',
+            label: 'Thông báo',
           ),
           BottomNavigationBarItem(
             icon: Container(
@@ -116,22 +130,25 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                      width: bottomBarBorderWidth,
-                      color: _page == 4 ? Colors.black : Colors.white),
+                    width: bottomBarBorderWidth,
+                    color: _page == 4
+                        ? CustomColors.primaryColor
+                        : CustomColors.scaffoldBackgroundColor,
+                  ),
                 ),
               ),
               child: const Icon(
                 Icons.favorite_outline_outlined,
               ),
             ),
-            label: '',
+            label: 'Yêu thích',
           ),
         ],
         currentIndex: _page,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
-        iconSize: 28,
+        iconSize: 25,
       ),
     );
   }
