@@ -38,6 +38,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   badges: ^3.0.2
+  carousel_images: ^1.1.2
+  bottom_bar_page_transition: ^2.0.0
+  font_awesome_flutter: ^10.3.0
 
 dev_dependencies:
   flutter_test:

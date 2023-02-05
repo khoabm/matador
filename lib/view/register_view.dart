@@ -5,19 +5,27 @@ import 'package:matador/theme/color.dart';
 import 'package:matador/widgets/custom_button.dart';
 import 'package:matador/widgets/custom_text_field.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  final _signInFormKey = GlobalKey<FormState>();
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _signUpFormKey = GlobalKey<FormState>();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   late bool _isFilled;
-  double opacity = 1.0;
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -27,18 +35,13 @@ class _LoginViewState extends State<LoginView> {
     _passwordController.addListener(setFilled);
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-  }
-
   void setFilled() async {
     ((_emailController.text.isEmpty) || (_passwordController.text.isEmpty))
         ? _isFilled = true
         : _isFilled = false;
+    Future.delayed(
+      const Duration(seconds: 2),
+    );
     setState(() {});
   }
 
@@ -61,7 +64,7 @@ class _LoginViewState extends State<LoginView> {
               ),
               color: Colors.white,
               child: Form(
-                key: _signInFormKey,
+                key: _signUpFormKey,
                 child: Column(
                   children: [
                     Row(
@@ -86,10 +89,10 @@ class _LoginViewState extends State<LoginView> {
                       height: 10,
                     ),
                     CustomTextField(
-                      inputType: TextInputType.emailAddress,
                       isObscure: false,
                       controller: _emailController,
                       hintText: "Nhập Email",
+                      inputType: TextInputType.emailAddress,
                       prefixIcons: const Icon(Icons.email),
                     ),
                     const SizedBox(
@@ -123,54 +126,12 @@ class _LoginViewState extends State<LoginView> {
                       prefixIcons: const Icon(Icons.key),
                     ),
                     const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Material(
-                          color: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          child: Ink(
-                            child: InkWell(
-                              splashColor: CustomColors.greyBackgroundCOlor,
-                              onTapDown: (TapDownDetails details) {
-                                opacity = 0.5;
-                                setState(() {});
-                                //print("tapped");
-                              },
-                              onTapUp: (TapUpDetails details) async {
-                                opacity = 1.0;
-                                await Future.delayed(
-                                  const Duration(
-                                    milliseconds: 200,
-                                  ),
-                                );
-                                setState(() {});
-                              },
-                              child: AnimatedOpacity(
-                                opacity: opacity,
-                                duration: const Duration(milliseconds: 200),
-                                child: const Text(
-                                  'Quên mật khẩu?',
-                                  style: TextStyle(
-                                    color: CustomColors.secondaryColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
                       height: 35,
                     ),
                     CustomButton(
-                      text: 'ĐĂNG NHẬP',
+                      text: 'ĐĂNG KÝ',
                       onTap: () {
-                        if (_signInFormKey.currentState!.validate()) {
+                        if (_signUpFormKey.currentState!.validate()) {
                           log('validate complete');
                         }
                       },
@@ -179,45 +140,6 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     const SizedBox(
                       height: 20,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            margin:
-                                const EdgeInsets.only(left: 10.0, right: 20.0),
-                            child: const Divider(
-                              color: Colors.black45,
-                              height: 36,
-                            ),
-                          ),
-                        ),
-                        const Text(
-                          "HOẶC",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black45,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin:
-                                const EdgeInsets.only(left: 10.0, right: 20.0),
-                            child: const Divider(
-                              color: Colors.black45,
-                              height: 36,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomButtonWithIcon(
-                      text: 'ĐĂNG NHẬP VỚI GOOGLE',
-                      onTap: () {},
-                      buttonColor: Colors.white,
                     ),
                   ],
                 ),

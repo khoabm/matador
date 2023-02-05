@@ -1,3 +1,5 @@
+import 'package:badges/badges.dart';
+import 'package:bottom_bar_page_transition/bottom_bar_page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:matador/theme/color.dart';
 import 'package:matador/view/auth_view.dart';
@@ -40,8 +42,19 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[_page],
+      body: //pages[_page]
+          BottomBarPageTransition(
+        builder: (_, index) {
+          return pages[index];
+        },
+        currentIndex: _page,
+        totalLength: pages.length,
+        transitionType: TransitionType.slide,
+        transitionDuration: const Duration(milliseconds: 350),
+        transitionCurve: Curves.ease,
+      ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedFontSize: 12,
         type: BottomNavigationBarType.fixed,
         onTap: updatePage,
         items: [
@@ -67,20 +80,28 @@ class _BottomBarState extends State<BottomBar> {
           ),
           //CART
           BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    width: bottomBarBorderWidth,
-                    color: _page == 1
-                        ? CustomColors.primaryColor
-                        : CustomColors.scaffoldBackgroundColor,
+            icon: Badge(
+              //position: BadgePosition.topEnd(top: 1, end: 3),
+              badgeContent: const Text('2'),
+              badgeStyle: const BadgeStyle(
+                elevation: 0,
+                badgeColor: CustomColors.scaffoldBackgroundColor,
+              ),
+              child: Container(
+                width: bottomBarWidth,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      width: bottomBarBorderWidth,
+                      color: _page == 1
+                          ? CustomColors.primaryColor
+                          : CustomColors.scaffoldBackgroundColor,
+                    ),
                   ),
                 ),
-              ),
-              child: const Icon(
-                Icons.shopping_cart_outlined,
+                child: const Icon(
+                  Icons.shopping_cart_outlined,
+                ),
               ),
             ),
             label: 'Giỏ hàng',
@@ -106,20 +127,27 @@ class _BottomBarState extends State<BottomBar> {
             label: 'Tài khoản',
           ),
           BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    width: bottomBarBorderWidth,
-                    color: _page == 3
-                        ? CustomColors.primaryColor
-                        : CustomColors.scaffoldBackgroundColor,
+            icon: Badge(
+              badgeContent: const Text('2'),
+              badgeStyle: const BadgeStyle(
+                elevation: 0,
+                badgeColor: CustomColors.scaffoldBackgroundColor,
+              ),
+              child: Container(
+                width: bottomBarWidth,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      width: bottomBarBorderWidth,
+                      color: _page == 3
+                          ? CustomColors.primaryColor
+                          : CustomColors.scaffoldBackgroundColor,
+                    ),
                   ),
                 ),
-              ),
-              child: const Icon(
-                Icons.notifications_on_outlined,
+                child: const Icon(
+                  Icons.notifications_on_outlined,
+                ),
               ),
             ),
             label: 'Thông báo',

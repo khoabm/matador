@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matador/theme/color.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final Color? buttonColor;
+  final bool isDisable;
   const CustomButton({
     super.key,
     required this.text,
     required this.onTap,
     required this.buttonColor,
+    this.isDisable = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(MediaQuery.of(context).size.width * 0.65, 40),
+        minimumSize: Size(
+          MediaQuery.of(context).size.width * 0.65,
+          MediaQuery.of(context).size.height * 0.06,
+        ),
         shape: const StadiumBorder(),
         backgroundColor: buttonColor,
         foregroundColor: CustomColors.primaryColor,
+        shadowColor: Colors.transparent,
+        disabledBackgroundColor: CustomColors.greyBackgroundCOlor,
+        disabledForegroundColor: CustomColors.greyBackgroundCOlor,
       ),
-      onPressed: onTap,
+      onPressed: isDisable == true ? null : onTap,
       child: Text(
         text,
         style: const TextStyle(
@@ -46,9 +55,12 @@ class CustomButtonWithIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      icon: const Icon(Icons.access_alarm_sharp, color: Colors.black),
+      icon: const FaIcon(FontAwesomeIcons.google),
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(MediaQuery.of(context).size.width * 0.65, 40),
+        minimumSize: Size(
+          MediaQuery.of(context).size.width * 0.65,
+          MediaQuery.of(context).size.height * 0.05,
+        ),
         shape: const StadiumBorder(),
         backgroundColor: buttonColor,
         foregroundColor: CustomColors.primaryColor,

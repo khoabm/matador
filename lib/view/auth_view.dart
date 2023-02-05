@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matador/theme/color.dart';
 import 'package:matador/view/login_view.dart';
+import 'package:matador/view/register_view.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -13,20 +14,16 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   int _page = 0;
 
-  void updatePage(int page) {
-    setState(() {
-      _page = page;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(
-      length: 2,
-      vsync: this,
-    );
-    _tabController.addListener(_handleTabSelection);
+    if (mounted) {
+      _tabController = TabController(
+        length: 2,
+        vsync: this,
+      );
+      _tabController.addListener(_handleTabSelection);
+    }
   }
 
   @override
@@ -42,7 +39,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
       length: 2,
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50),
+          preferredSize: const Size.fromHeight(60),
           child: AppBar(
             centerTitle: true,
             elevation: 0,
@@ -70,12 +67,11 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TabBar(
-              onTap: (index) {
-                updatePage(index);
-                print(_page);
-              },
+              // onTap: (index) {
+              //   updatePage(index);
+              // },
               unselectedLabelColor: Colors.black,
-              labelColor: CustomColors.primaryColor,
+              labelColor: CustomColors.secondaryColor,
               tabs: const [
                 Tab(
                   text: 'ĐĂNG NHẬP',
@@ -88,14 +84,14 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
               // indicatorSize: TabBarIndicatorSize.tab,
               indicatorSize: TabBarIndicatorSize.label,
               indicatorPadding: const EdgeInsets.symmetric(horizontal: 10),
-              indicatorColor: CustomColors.primaryColor,
+              indicatorColor: CustomColors.secondaryColor,
             ),
             Expanded(
               child: TabBarView(
                 controller: _tabController,
                 children: const [
                   LoginView(),
-                  Text('Person'),
+                  RegisterScreen(),
                 ],
               ),
             ),
@@ -108,6 +104,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
   void _handleTabSelection() {
     setState(() {
       _page = _tabController.index;
+      FocusManager.instance.primaryFocus?.unfocus();
     });
   }
 }
