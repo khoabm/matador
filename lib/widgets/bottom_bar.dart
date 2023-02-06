@@ -3,6 +3,7 @@ import 'package:bottom_bar_page_transition/bottom_bar_page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:matador/theme/color.dart';
 import 'package:matador/view/auth_view.dart';
+import 'package:matador/widgets/custom_carousel.dart';
 
 class BottomBar extends StatefulWidget {
   static const String routeName = '';
@@ -42,6 +43,15 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: const CarouselWidget(
+        images: [
+          'assets/images/carousel1.jpg',
+          'assets/images/carousel2.jpg',
+          'assets/images/carousel3.jpg',
+          'assets/images/carousel4.jpg',
+          'assets/images/carousel5.jpg',
+        ],
+      ),
       body: //pages[_page]
           BottomBarPageTransition(
         builder: (_, index) {
@@ -50,8 +60,8 @@ class _BottomBarState extends State<BottomBar> {
         currentIndex: _page,
         totalLength: pages.length,
         transitionType: TransitionType.slide,
-        transitionDuration: const Duration(milliseconds: 350),
-        transitionCurve: Curves.ease,
+        transitionDuration: const Duration(milliseconds: 700),
+        transitionCurve: Curves.fastOutSlowIn,
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: 12,
