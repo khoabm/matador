@@ -42,16 +42,16 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: //pages[_page]
-          BottomBarPageTransition(
+      body: BottomBarPageTransition(
         builder: (_, index) {
+          //Future.delayed(const Duration(microseconds: 400));
           return pages[index];
         },
         currentIndex: _page,
         totalLength: pages.length,
         transitionType: TransitionType.slide,
-        transitionDuration: const Duration(milliseconds: 350),
-        transitionCurve: Curves.ease,
+        //transitionDuration: const Duration(milliseconds: 350),
+        //transitionCurve: Curves.ease,
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: 12,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matador/utils/page_transition.dart';
 import 'package:matador/view/auth_view.dart';
+import 'package:matador/view/authenticated_view.dart';
 import 'package:matador/widgets/bottom_bar.dart';
 import 'constant/routes_constraints.dart';
 
@@ -14,6 +15,7 @@ Route<dynamic> generateRoutes(RouteSettings routeSettings) {
       return (SlideBottomRoute(
         page: const BottomBar(),
       ));
+
     default:
       return MaterialPageRoute(
         settings: routeSettings,

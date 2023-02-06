@@ -59,7 +59,7 @@ class CustomButtonWithIcon extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: Size(
           MediaQuery.of(context).size.width * 0.65,
-          MediaQuery.of(context).size.height * 0.05,
+          MediaQuery.of(context).size.height * 0.06,
         ),
         shape: const StadiumBorder(),
         backgroundColor: buttonColor,
