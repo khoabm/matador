@@ -22,11 +22,13 @@ class MyApp extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Colors.black, //change your color here
         ),
+        
         colorScheme: const ColorScheme.light(
           primary: CustomColors.primaryColor,
         ),
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) => generateRoutes(settings),
       home: const BottomBar(),
       // body: Center(
