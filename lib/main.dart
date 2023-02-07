@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Matador',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -22,13 +23,11 @@ class MyApp extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Colors.black, //change your color here
         ),
-        
         colorScheme: const ColorScheme.light(
           primary: CustomColors.primaryColor,
         ),
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) => generateRoutes(settings),
       home: const BottomBar(),
       // body: Center(
