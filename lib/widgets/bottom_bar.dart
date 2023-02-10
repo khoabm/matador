@@ -3,6 +3,7 @@ import 'package:bottom_bar_page_transition/bottom_bar_page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:matador/theme/color.dart';
 import 'package:matador/view/auth_view.dart';
+import 'package:matador/view/home_view.dart';
 import 'package:matador/widgets/custom_carousel.dart';
 
 class BottomBar extends StatefulWidget {
@@ -19,9 +20,7 @@ class _BottomBarState extends State<BottomBar> {
   double bottomBarBorderWidth = 3;
 
   List<Widget> pages = [
-    const Center(
-      child: Text('Home Page'),
-    ),
+    const HomePage(),
     const Center(
       child: Text('Cart Page'),
     ),
@@ -51,6 +50,8 @@ class _BottomBarState extends State<BottomBar> {
         currentIndex: _page,
         totalLength: pages.length,
         transitionType: TransitionType.slide,
+        transitionCurve: Curves.fastOutSlowIn,
+        transitionDuration: const Duration(milliseconds: 700),
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: 12,
